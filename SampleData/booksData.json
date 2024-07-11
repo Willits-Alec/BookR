@@ -1,0 +1,12 @@
+[
+    {
+        "bookId": "987654321",
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Classic Literature",
+        "description": "The story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan.",
+        "publication_date": "April 10, 1925",
+        "average_rating": 4.2
+      }
+      
+]

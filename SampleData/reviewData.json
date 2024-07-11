@@ -1,0 +1,10 @@
+[
+    {
+        "reviewId": "123456789",
+        "userId": "100",
+        "bookId": "987654321",
+        "rating": 4.5,
+        "reviewText": "A captivating read! The characters are well-developed, and the plot kept me engaged from start to finish.",
+        "date": "2024-07-10"
+    }
+]
