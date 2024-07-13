@@ -1,6 +1,14 @@
 ### Get All Users
-GET http://localhost:3000/users
+GET http://localhost:3000/auth
 
-### Get User by Id
+### Add a new User
+POST http://localhost:3000/auth
 
-GET http://localhost:3000/students/6692cbcdca25b13a229d690f
+### Get user by ID
+GET http://localhost:3000/auth/100
+
+### Update a User by ID
+PUT http://localhost:3000/auth/100
+
+### Delete User by ID
+DELETE http://localhost:3000/auth/100
