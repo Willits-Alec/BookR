@@ -33,7 +33,7 @@ app.use('/books', bookRoutes);
 // app.use('/reviews', reviewRoutes);
 // app.use('/recommendations', recommendationRoutes);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
