@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mongodb = require('./models/database')
 
 // Load environment variables
 dotenv.config();
@@ -28,12 +29,19 @@ db.once('open', () => {
 });
 
 // Routes
+app.use("/", require('./routes'));
 app.use('/auth', authRoutes);
 app.use('/books', bookRoutes);
 // app.use('/reviews', reviewRoutes);
 // app.use('/recommendations', recommendationRoutes);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const port = process.env.PORT || 3000;
+mongodb.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    app.listen(port, () => {
+      console.log(`Database is listening and node Running on port ${port}`);
+    });
+  }
 });
