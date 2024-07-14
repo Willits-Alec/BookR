@@ -1,6 +1,22 @@
 ### Get All Users
-GET http://localhost:3000/users
+GET http://localhost:3000/auth
 
 ### Get User by Id
 
-GET http://localhost:3000/students/6692cbcdca25b13a229d690f
+GET http://localhost:3000/auth/6692a820262d36e474fd6a24
+
+### Create User localhost 
+POST http://localhost:3000/auth HTTP/1.1 content-type: application/json
+
+{
+"user_id": "101", "username": "nb10", "email": "nathanb10", "password": "happynathan12", "first_name": "Nathan", "last_name": "Birch", "bio": "I love coding!"
+}
+
+### Update User localhost 
+PUT http://localhost:3000/auth/6692a820262d36e474fd6a24 HTTP/1.1 content-type: application/json
+
+{
+"user_id": "101", "username": "nb10", "email": "nathanb10", "password": "happynathan15", "first_name": "Nathan", "last_name": "Birch", "bio": "I love designing!"
+}
+### Delete User localhost 
+DELETE http://localhost:3000/auth/6692a820262d36e474fd6a24 HTTP/1.1
