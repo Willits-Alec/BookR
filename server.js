@@ -1,9 +1,8 @@
 const express = require('express');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const mongodb = require('./models/database')
 
 // Load environment variables
 dotenv.config();
@@ -20,28 +19,21 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // MongoDB connection
-// mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGO_URI);
 
-/* const db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
-}); */
+});
 
 // Routes
-app.use("/", require('./routes'));
 app.use('/auth', authRoutes);
 app.use('/books', bookRoutes);
 // app.use('/reviews', reviewRoutes);
 // app.use('/recommendations', recommendationRoutes);
 
-const port = process.env.PORT || 3000;
-mongodb.initDb((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port, () => {
-      console.log(`Database is listening and node Running on port ${port}`);
-    });
-  }
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

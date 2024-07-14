@@ -1,8 +1,10 @@
 ### Get All Users
 GET http://localhost:3000/auth
 
-### Get User by Id
+### Add a new User
+POST http://localhost:3000/auth
 
+<<<<<<< HEAD
 GET http://localhost:3000/auth/6692a820262d36e474fd6a24
 
 ### Create User localhost 
@@ -20,3 +22,13 @@ PUT http://localhost:3000/auth/6692a820262d36e474fd6a24 HTTP/1.1 content-type: a
 }
 ### Delete User localhost 
 DELETE http://localhost:3000/auth/669316a8ca25b13a229d6911 HTTP/1.1
+=======
+### Get user by ID
+GET http://localhost:3000/auth/100
+
+### Update a User by ID
+PUT http://localhost:3000/auth/100
+
+### Delete User by ID
+DELETE http://localhost:3000/auth/100
+>>>>>>> 214743892632fb86494931d1a416ef07371a764d
