@@ -19,4 +19,4 @@ PUT http://localhost:3000/auth/6692a820262d36e474fd6a24 HTTP/1.1 content-type: a
 "user_id": "101", "username": "nb10", "email": "nathanb10", "password": "happynathan15", "first_name": "Nathan", "last_name": "Birch", "bio": "I love designing!"
 }
 ### Delete User localhost 
-DELETE http://localhost:3000/auth/6692a820262d36e474fd6a24 HTTP/1.1
+DELETE http://localhost:3000/auth/669316a8ca25b13a229d6911 HTTP/1.1
