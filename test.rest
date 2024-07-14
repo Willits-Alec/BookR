@@ -4,25 +4,6 @@ GET http://localhost:3000/auth
 ### Add a new User
 POST http://localhost:3000/auth
 
-<<<<<<< HEAD
-GET http://localhost:3000/auth/6692a820262d36e474fd6a24
-
-### Create User localhost 
-POST http://localhost:3000/auth HTTP/1.1 content-type: application/json
-
-{
-"user_id": "101", "username": "nb10", "email": "nathanb10", "password": "happynathan12", "first_name": "Nathan", "last_name": "Birch", "bio": "I love coding!"
-}
-
-### Update User localhost 
-PUT http://localhost:3000/auth/6692a820262d36e474fd6a24 HTTP/1.1 content-type: application/json
-
-{
-"user_id": "101", "username": "nb10", "email": "nathanb10", "password": "happynathan15", "first_name": "Nathan", "last_name": "Birch", "bio": "I love designing!"
-}
-### Delete User localhost 
-DELETE http://localhost:3000/auth/669316a8ca25b13a229d6911 HTTP/1.1
-=======
 ### Get user by ID
 GET http://localhost:3000/auth/100
 
@@ -31,4 +12,3 @@ PUT http://localhost:3000/auth/100
 
 ### Delete User by ID
 DELETE http://localhost:3000/auth/100
->>>>>>> 214743892632fb86494931d1a416ef07371a764d
