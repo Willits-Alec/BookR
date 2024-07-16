@@ -9,8 +9,8 @@ dotenv.config();
 
 const authRoutes = require('./routes/authRoutes');
 const bookRoutes = require('./routes/bookRoutes');
-// const reviewRoutes = require('./routes/reviewRoutes');
-// const recommendationRoutes = require('./routes/recommendationRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 
 const app = express();
 
