@@ -30,8 +30,8 @@ db.once('open', () => {
 // Routes
 app.use('/auth', authRoutes);
 app.use('/books', bookRoutes);
-// app.use('/reviews', reviewRoutes);
-// app.use('/recommendations', recommendationRoutes);
+app.use('/reviews', reviewRoutes);
+app.use('/recommendations', recommendationRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
