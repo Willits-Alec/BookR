@@ -101,8 +101,18 @@ app.get('/auth/github/callback',
   });
 
 app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
+  req.logout(() => {
+    res.redirect('/');
+  });
+});
+
+// Profile route to check authentication status
+app.get('/profile', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
 });
 
 // Middleware to check if the user is authenticated
