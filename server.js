@@ -1,9 +1,10 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 // Load environment variables
 dotenv.config();
@@ -17,7 +18,16 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+
+// Configure CORS
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Handle preflight requests
+app.options('*', cors());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -30,6 +40,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
 });
+
+// Swagger setup
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use('/auth', authRoutes);
