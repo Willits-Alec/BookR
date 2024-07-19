@@ -19,7 +19,6 @@ passport.use(new GitHubStrategy({
   callbackURL: process.env.CALLBACK_URL || "http://localhost:3000/auth/github/callback"
 },
 function(accessToken, refreshToken, profile, done) {
-  // In a real application, you might store the user info in a database
   return done(null, profile);
 }
 ));
@@ -129,7 +128,7 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/auth/github/callback');
 }
 
-// Define routes directly in server.js
+// Added HTML for home routes and links
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
