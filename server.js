@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 // Configure CORS
 app.use(cors({
-  origin: '*',
+  origin: '*', // Allow all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -31,8 +31,9 @@ app.options('*', cors());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // Remove deprecated options
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true
 });
 
 const db = mongoose.connection;
@@ -57,6 +58,11 @@ app.use((err, req, res, next) => {
     message: err.message || 'Internal Server Error',
     error: process.env.NODE_ENV === 'production' ? {} : err,
   });
+});
+
+// Test Route
+app.get('/test-cors', (req, res) => {
+  res.json({ message: 'CORS is working!' });
 });
 
 const PORT = process.env.PORT || 3000;
