@@ -1,3 +1,4 @@
+// Server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -40,7 +41,7 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(session({ secret: 'your-session-secret', resave: false, saveUninitialized: true }));
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -68,7 +69,7 @@ db.once('open', () => {
 });
 
 // Swagger setup
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', ensureAuthenticated, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use('/auth', authRoutes);
@@ -101,27 +102,88 @@ app.get('/auth/github/callback',
   });
 
 app.get('/logout', (req, res) => {
-  req.logout(() => {
-    res.redirect('/');
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
   });
 });
 
-// Profile route to check authentication status
-app.get('/profile', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json(req.user);
-  } else {
-    res.status(401).json({ message: 'Not authenticated' });
-  }
-});
+// // Profile route to check authentication status
+// app.get('/profile', (req, res) => {
+//   if (req.isAuthenticated()) {
+//     res.json(req.user);
+//   } else {
+//     res.status(401).json({ message: 'Not authenticated' });
+//   }
+// });
 
 // Middleware to check if the user is authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/auth/github');
+  res.redirect('/auth/github/callback');
 }
+
+// Define routes directly in server.js
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Home</title>
+      <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        a { display: block; margin: 10px 0; text-decoration: none; color: #007BFF; }
+        a:hover { text-decoration: underline; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Welcome to BookR</h1>
+        <p><a href="/auth/github/callback">Login with GitHub</a></p>
+        <p><a href="/logout">Logout</a></p>
+        <p><a href="/profile">Profile Page</a></p>
+        <p><a href="/api-docs">API Documentation</a></p>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
+app.get('/profile', ensureAuthenticated, (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Profile</title>
+      <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        a { display: block; margin: 10px 0; text-decoration: none; color: #007BFF; }
+        a:hover { text-decoration: underline; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Profile Page</h1>
+        <p><strong>Name:</strong> ${req.user.displayName || 'N/A'}</p>
+        <p><strong>GitHub Username:</strong> ${req.user.username || 'N/A'}</p>
+        <p><a href="/">Home</a></p>
+      </div>
+    </body>
+    </html>
+  `);
+});
 
 // Protect POST and PUT endpoints for bookRoutes and reviewRoutes
 app.use('/books', ensureAuthenticated, bookRoutes);
