@@ -1,6 +1,8 @@
+// reviewController
 const Review = require('../models/reviewModel');
+const { validationResult } = require('express-validator');
 
-exports.getAllReviews= async (req, res) => {
+exports.getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.find();
     res.json(reviews);
@@ -10,6 +12,11 @@ exports.getAllReviews= async (req, res) => {
 };
 
 exports.createReview = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const review = new Review(req.body);
   try {
     const newReview = await review.save();
@@ -32,6 +39,11 @@ exports.getReviewById = async (req, res) => {
 };
 
 exports.updateReview = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const review = await Review.findOneAndUpdate({ reviewId: req.params.id }, req.body, { new: true });
     if (review == null) {

@@ -1,4 +1,6 @@
+// bookController
 const Book = require('../models/bookModel');
+const { validationResult } = require('express-validator');
 
 exports.getAllBooks = async (req, res) => {
   try {
@@ -10,6 +12,11 @@ exports.getAllBooks = async (req, res) => {
 };
 
 exports.createBook = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const book = new Book(req.body);
   try {
     const newBook = await book.save();
@@ -32,6 +39,11 @@ exports.getBookById = async (req, res) => {
 };
 
 exports.updateBook = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const book = await Book.findOneAndUpdate({ bookId: req.params.id }, req.body, { new: true });
     if (book == null) {
