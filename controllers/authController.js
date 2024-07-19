@@ -1,4 +1,6 @@
+// authController
 const User = require('../models/userModel');
+const { validationResult } = require('express-validator');
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -10,6 +12,11 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const user = new User(req.body);
   try {
     const newUser = await user.save();
@@ -32,6 +39,11 @@ exports.getUserById = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const user = await User.findOneAndUpdate({ user_id: req.params.id }, req.body, { new: true });
     if (user == null) {
