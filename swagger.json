@@ -8,13 +8,13 @@
   "host": "https://bookr-bpd4.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/auth/": {
       "get": {
-        "description": "",
+        "description": "Retrieve authentication details",
         "responses": {
           "200": {
             "description": "OK"
@@ -25,7 +25,18 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new authentication entry",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Authentication data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -38,13 +49,14 @@
     },
     "/auth/{id}": {
       "get": {
-        "description": "",
+        "description": "Retrieve a specific authentication entry by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the authentication entry to retrieve"
           }
         ],
         "responses": {
@@ -60,13 +72,23 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a specific authentication entry by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the authentication entry to update"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated authentication data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
           }
         ],
         "responses": {
@@ -82,13 +104,14 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a specific authentication entry by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the authentication entry to delete"
           }
         ],
         "responses": {
@@ -106,7 +129,21 @@
     },
     "/books/": {
       "get": {
-        "description": "",
+        "description": "Retrieve a list of books",
+        "parameters": [
+          {
+            "name": "author",
+            "in": "query",
+            "type": "string",
+            "description": "Filter books by author"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "type": "integer",
+            "description": "Filter books by publication year"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -117,7 +154,18 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new book entry",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Book object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -130,13 +178,14 @@
     },
     "/books/{id}": {
       "get": {
-        "description": "",
+        "description": "Retrieve a specific book by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the book to retrieve"
           }
         ],
         "responses": {
@@ -152,13 +201,23 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a specific book by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the book to update"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated book object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
           }
         ],
         "responses": {
@@ -174,13 +233,14 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a specific book by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the book to delete"
           }
         ],
         "responses": {
@@ -198,7 +258,7 @@
     },
     "/reviews/": {
       "get": {
-        "description": "",
+        "description": "Retrieve a list of reviews",
         "responses": {
           "200": {
             "description": "OK"
@@ -209,7 +269,18 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new review",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Review object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -222,13 +293,14 @@
     },
     "/reviews/{id}": {
       "get": {
-        "description": "",
+        "description": "Retrieve a specific review by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the review to retrieve"
           }
         ],
         "responses": {
@@ -244,13 +316,23 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a specific review by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the review to update"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated review object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
           }
         ],
         "responses": {
@@ -266,13 +348,14 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a specific review by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the review to delete"
           }
         ],
         "responses": {
@@ -290,7 +373,7 @@
     },
     "/recommendations/": {
       "get": {
-        "description": "",
+        "description": "Retrieve a list of recommendations",
         "responses": {
           "200": {
             "description": "OK"
@@ -301,7 +384,18 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new recommendation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Recommendation object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Recommendation"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -314,13 +408,14 @@
     },
     "/recommendations/{id}": {
       "get": {
-        "description": "",
+        "description": "Retrieve a specific recommendation by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the recommendation to retrieve"
           }
         ],
         "responses": {
@@ -336,13 +431,23 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a specific recommendation by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the recommendation to update"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated recommendation object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Recommendation"
+            }
           }
         ],
         "responses": {
@@ -358,13 +463,14 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a specific recommendation by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID of the recommendation to delete"
           }
         ],
         "responses": {
@@ -379,6 +485,59 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": ["title", "author"]
+    },
+    "Auth": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": ["username", "password"]
+    },
+    "Review": {
+      "type": "object",
+      "properties": {
+        "bookId": {
+          "type": "string"
+        },
+        "reviewText": {
+          "type": "string"
+        }
+      },
+      "required": ["bookId", "reviewText"]
+    },
+    "Recommendation": {
+      "type": "object",
+      "properties": {
+        "bookId": {
+          "type": "string"
+        },
+        "recommendationText": {
+          "type": "string"
+        }
+      },
+      "required": ["bookId", "recommendationText"]
     }
   }
 }
