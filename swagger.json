@@ -8,7 +8,6 @@
   "host": "https://bookr-bpd4.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
