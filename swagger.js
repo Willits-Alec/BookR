@@ -6,7 +6,7 @@ const doc = {
     title: "CSE 341 - Final Project",
     description: "Book Review API",
   },
-  host: "bookr-bpd4.onrender.com",
+  host: "localhost:3000/",
   schemes: ["https"],
 };
 
