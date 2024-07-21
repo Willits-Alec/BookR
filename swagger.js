@@ -6,8 +6,8 @@ const doc = {
     title: "CSE 341 - Final Project",
     description: "Book Review API",
   },
-  host: "https://bookr-bpd4.onrender.com",
-  schemes: ["https", "http"],
+  host: "bookr-bpd4.onrender.com",
+  schemes: ["https"],
 };
 
 const outputFile = "./swagger.json";

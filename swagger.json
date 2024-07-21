@@ -5,10 +5,9 @@
     "description": "Book Review API",
     "version": "1.0.0"
   },
-  "host": "https://bookr-bpd4.onrender.com",
+  "host": "https://bookr-bpd4.onrender.com/",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
